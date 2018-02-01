@@ -15,6 +15,11 @@ type Student struct {
 	Extra map[string]float32 `json:"extra"`
 }
 
+type Animal struct {
+	Name  string
+	Order string
+}
+
 func main() {
 	student := Student{
 		ID: 1001,
@@ -70,4 +75,18 @@ func main() {
 	orderListDecode := []map[string]string{}
 	err = json.Unmarshal(data, &orderListDecode)
 	fmt.Println(orderListDecode)
+
+
+	//convert json data to slice of Animal Struct
+	jsonBlob := []byte(`[
+		{"Name": "Platypus", "Order": "Monotremata"},
+		{"Name": "Quoll",    "Order": "Dasyuromorphia"}
+	]`)
+
+	animals := []Animal{}
+	err = json.Unmarshal(jsonBlob, &animals)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Printf("%+v", animals)
 }
