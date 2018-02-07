@@ -5,12 +5,13 @@ import (
 	"fmt"
 )
 
-func query(ch chan int)  {
+func query(ch chan bool)  {
 	time.Sleep(time.Second * 5)
+	ch <- true
 }
 
 func main() {
-	ch := make(chan int)
+	ch := make(chan bool)
 	go query(ch)
 
 	t := time.NewTicker(time.Second * 10)
